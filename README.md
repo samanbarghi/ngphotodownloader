@@ -9,7 +9,7 @@ National Geographic Photo of the Day Downloader for Linux.
 Setup
 =================
 
-  All you need to do is to create a directory for your wallpaper and put the script in there, e.g.:
+  All you need to do is to create a directory for your wallpapers and put the script in there, e.g.:
   
     cd ~/Pictures/
     git clone https://github.com/samanbarghi/ngphotodownloader.git NGWallpapers
