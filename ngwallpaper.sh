@@ -15,7 +15,6 @@ done
 
 #Change directory to where the script resides. 
 BASEDIR=$(dirname $0)
-echo $BASEDIR
 cd $BASEDIR
 #######################
 
