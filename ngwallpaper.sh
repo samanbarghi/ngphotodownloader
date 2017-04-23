@@ -1,9 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 # This Script downloads National Geographic Photo of the day, and sets it as desktop background (gnome, unity)
 # Copyright (C) 2012 Saman Barghi - All Rights Reserved
 # Permission to copy, modify, and distribute is granted under GPLv3
-# Last Revised 29 Augst 2012
+# Last Revised 23 April 2017
 
+# instead of 'cinnamon',  'gnome-session', 'noutilus', or 'compiz' can be used
+# or the name of a process of a graphical program about that you are sure that is
+# running after you log in the X session
+PID=$(pgrep -o cinnamon)
+export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
 
 #check for network
 while [ -z "`curl -s --head http://google.com/ | head -n 1 | grep 'HTTP/1.[01]'`" ]
@@ -36,7 +41,7 @@ then
 	else
         curl "$img" > $img_file
 		#set the current image as wallpaper
-		#gsettings set org.gnome.desktop.background picture-uri file:///`pwd`/$img_file
+        gsettings set org.gnome.desktop.background picture-uri "file://${BASEDIR}/${img_file}"
 		echo "Wallpaper downloaded successfully and saved as $img_file"
 	fi
 else
