@@ -4,10 +4,10 @@
 # Permission to copy, modify, and distribute is granted under GPLv3
 # Last Revised 23 April 2017
 
-# instead of 'cinnamon',  'gnome-session', 'noutilus', or 'compiz' can be used
+# instead of 'cinnamon-session|gnome-session|mate-session"',  'noutilus', or 'compiz' can be used
 # or the name of a process of a graphical program about that you are sure that is
 # running after you log in the X session
-PID=$(pgrep -o cinnamon)
+PID=$(pgrep -o "cinnamon-sess|gnome-sess|mate-sess")
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
 
 #check for network
