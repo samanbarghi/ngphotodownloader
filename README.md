@@ -13,16 +13,30 @@ Setup
   
     cd ~/Pictures/
     git clone https://github.com/samanbarghi/ngphotodownloader.git NGWallpapers
+    
+
 
 Cron
 =================
-  You can setup your cron to run daily to download and set the background. Simply add something like this to your crontab:
+  You can setup your cron to run daily to download and set the background. Add the following to current user's crontab by issueing:
   
+     crontab -u username -e
+     
+  Replace  `username` with your username. Make sure to export `PATH` in your crontab
+  
+    PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin  
     0 12 *  * * sh /home/yourusername/Pictures/NGWallpapers/ngwallpaper.sh
     
   In my case since I am running the script on my laptop, and my laptop is not always on; I call the script every 3 hours to make sure it runs at least once each day. Don't worry about duplicates, the script will not download the image if it already exists in the directory. The overhead of the script on cpu/memory/network is negligible, so don't worry about calling the script 8 times a day:
 
     00 */3 * * * sh /home/yourusername/Pictures/NGWallpapers/ngwallpaper.sh
+    
+ Keep in mind that   `DBUS_SESSION_BUS_ADDRESS` is only detected for `cinnamon`, `gnome`, and `mate`. If other managers are runnign  you need to modify the following lines in the script so `pgrep` catch the right `pid`: 
+ 
+  PID=$(pgrep -o "cinnamon-sess|gnome-sess|mate-sess")
+  export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
+
+Refer to http://stackoverflow.com/questions/10374520/gsettings-with-cron for more information. 
     
 Enjoy!
 =================
