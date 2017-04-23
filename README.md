@@ -34,8 +34,7 @@ Cron
  Keep in mind that   `DBUS_SESSION_BUS_ADDRESS` is only detected for `cinnamon`, `gnome`, and `mate`. If other managers are runnign  you need to modify the following lines in the script so `pgrep` catch the right `pid`: 
  
   PID=$(pgrep -o "cinnamon-sess|gnome-sess|mate-sess")
-  export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
-
+  
 Refer to http://stackoverflow.com/questions/10374520/gsettings-with-cron for more information. 
     
 Enjoy!
