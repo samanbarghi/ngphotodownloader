@@ -41,7 +41,7 @@ then
 	else
         curl "$img" > $img_file
 		#set the current image as wallpaper
-        gsettings set org.gnome.desktop.background picture-uri "file://${BASEDIR}/${img_file}"
+        gsettings set org.gnome.desktop.background picture-uri "file://`pwd`/${img_file}"
 		echo "Wallpaper downloaded successfully and saved as $img_file"
 	fi
 else
