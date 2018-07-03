@@ -24,14 +24,12 @@ cd $BASEDIR
 #######################
 
 #getting the image URL
-#img=`curl http://photography.nationalgeographic.com/photography/photo-of-the-day/ | grep download_link | awk -F\" '{print $4}'`
-#img="http:$(curl http://photography.nationalgeographic.com/photography/photo-of-the-day/ | awk 'found && /<\/div>/ {exit}; found ;/class="primary_photo"/ {found=1}' | grep -oP '(?<=img src=")[^"]*(?=")')"
-img="$(curl https://www.nationalgeographic.com/photography/photo-of-the-day/ -s | grep -oP '(?<='\''aemLeadImage'\'': '\'')[^'\'']*')"
+img="$(curl https://www.nationalgeographic.com/photography/photo-of-the-day/ -s | grep -oP '(?<="twitter:image:src" content=")\K[^"]*')"
 
 #check to see if there is any wallpaper to download
 if [ -n "$img" ]
 then
-    img_base=`basename $img`
+    img_base=`echo $img | cut -d/ -f 5`
     img_md5=`echo -n $img_base | md5sum | cut -f1 -d" "`
 	img_file="$img_md5.jpg"
 
