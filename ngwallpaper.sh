@@ -29,13 +29,13 @@ img="$(curl https://www.nationalgeographic.com/photography/photo-of-the-day/ -s 
 #check to see if there is any wallpaper to download
 if [ -n "$img" ]
 then
-    img_base=`echo $img | cut -d/ -f 5`
+    img_base=`echo $img | awk -F/ '{print $NF}'`
     img_md5=`echo -n $img_base | md5sum | cut -f1 -d" "`
 	img_file="$img_md5.jpg"
 
 	if [ -f "$img_file" ]
 	then
-		echo "File already exists"
+		echo "File $img_file already exists"
 	else
         curl "$img" > $img_file
 		#set the current image as wallpaper
