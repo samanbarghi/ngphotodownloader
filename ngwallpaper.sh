@@ -24,7 +24,7 @@ cd $BASEDIR
 #######################
 
 #getting the image URL
-img="$(curl https://www.nationalgeographic.com/photography/photo-of-the-day/ -s | grep -oP '(?<="og:image" content=")\K[^"]*')"
+img="$(curl https://www.nationalgeographic.com/photography/photo-of-the-day -s -L | grep -oP '(?<="og:image" content=")\K[^"]*')"
 
 #check to see if there is any wallpaper to download
 if [ -n "$img" ]
